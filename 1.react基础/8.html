@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+
+  <!-- babel  用于编译jsx -->
+  <script src="./js/browser.min.js"></script>
+  <!-- react 核心功能 只能定义组件 只能管理状态 -->
+  <script src="./js/react.development.js"></script>
+  <!-- 依赖react.development.js 用于渲染组件 -->
+  <script src="./js/react-dom.development.js"></script>
+
+  <script type="text/babel">
+    class Cmp1 extends React.Component{
+      constructor(...args) {
+        super(...args)
+      }
+      
+      render() {
+        let sapn = <span>111</span>;
+        let arr= [
+          <div key={1}>aaa</div>,
+          <div key={2}>bbb</div>,
+          <div key={3}>ccc</div>
+        ]
+        // react 会自动添加key
+        // 普通变量自动添加
+        // 插入数组需要设置key 
+        // 成组创建元素必须用key key不能重复 key不能改变
+
+        let a1 = [12,3,6];
+        let adiv = [];
+        for(let i=0; i<a1.length; i++) {
+          adiv[i] = <div key={i}>{a1[i]}</div>
+        }
+
+        let aD = arr.map((item, index) => {
+          <div key={index}>{item}</div>
+        })
+        // return (
+        //   <div>
+        //     组件1
+        //     {arr}
+        //     {adiv}
+        //     {aD}
+        //   </div>
+        // )
+        return (
+          <div>
+            {
+              a1.map((item, index) => (
+                <div key={index}>
+                  {item}
+                </div>
+
+              ))
+            }
+          </div>
+        )
+      }
+    }
+    let tmp = <Cmp1 />  
+    ReactDOM.render((
+      <div>
+        aaa 
+        {tmp}
+      </div>
+    ),document.getElementById('app'))
+  
+  </script>
+</body>
+</html>

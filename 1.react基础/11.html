@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+  
+    <!-- babel  用于编译jsx -->
+    <script src="./js/browser.min.js"></script>
+    <!-- react 核心功能 只能定义组件 只能管理状态 -->
+    <script src="./js/react.development.js"></script>
+    <!-- 依赖react.development.js 用于渲染组件 -->
+    <script src="./js/react-dom.development.js"></script>
+  
+    
+    <script type="text/babel">
+    // 引发组件重新渲染的条件
+    // 1.setState 发生变化
+    // 2.props 发生变化
+    // 3.强制渲染
+    /* 
+      属性
+      属性的变化不会导致重新渲染
+    */
+    /*
+      状态
+      一旦变化 组件会重新渲染
+      不能直接修改 需要this.setState()
+      状态的初始化只能放在constructor中
+    */
+    /* 
+      事件
+      事件名需要大写 onclick =>  onClick
+      bind 修改绑定this 
+    */
+      class Cmp1 extends React.Component{
+        constructor(...args) {
+          super(...args)
+          this.a = 12;
+          // state 初始化
+          // state 状态的变化会导致组件重新渲染
+          this.state = {
+            a: 1
+          }
+        }
+
+        // 
+        fn() {
+          // 不能给只读属性赋值
+          // props是只读的。只能读取 不能写入
+          this.props.a++;
+        }
+        
+        render() {
+          // this render里的this是对的
+          console.log('渲染了')
+          return (
+            <div>
+              {this.props.a}
+              <button onClick={this.fn.bind(this)}>按钮 +1</button>
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(<Cmp1 a={12}/>  ,document.getElementById('app'))
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .active{
+      background: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="js/browser.min.js"></script>
+  <script src="js/react.development.js"></script>
+  <script src="js/react-dom.development.js"></script>
+
+  <script type="text/babel">
+    class Search extends React.Component{
+      constructor(params){
+        super(params)
+
+        this.change = this.change.bind()
+      }
+      search() {
+        this.props.search(this.refs.oInput.value)
+      }
+      render() {
+        return(
+          <div>
+            <label htmlFor="search">搜索</label>
+            <input type="text" id="search" onChange={this.change} ref="oInput"/>  
+          </div>
+        )
+      }
+    }
+    class Add extends React.Component{
+      constructor(params){
+        super(params)
+        this.addfun = this.addfun.bind(this)
+      }
+      addfun() {
+        this.props.addList(this.refs.text.value)
+        this.refs.text.value = ''
+      }
+      render() {
+        return(
+          <div>
+            <label htmlFor="add">添加</label>
+            <input type="text" ref="text"/>  
+            <button onClick={this.addfun}>add</button>
+          </div>
+        )
+      }
+    }
+
+    class List extends React.Component{
+      constructor(params){
+        super(params)
+      }
+      
+      render() {
+        return (
+          <ul>
+            {
+              this.props.todos.map((item) => (
+                <li key={item.id} className={item.isActive ? 'active': ''}>
+                  <input type="checkbox" onClick={()=> {
+                    this.props.change(item.id)
+                  }}/>
+                  <span>{item.name}</span>
+                  <button onClick={()=> {
+                    this.props.delList(item.id)
+                  }}>del</button>
+                </li>
+              ))
+            }  
+          </ul>
+        )
+      }
+    }
+
+    class Main extends React.Component{
+      constructor(params){
+        super(params)
+        this.state = {
+          list: [{
+            id: 1,
+            name: '111',
+            isActive: false
+          },
+          {
+            id: 2,
+            name: '222',
+            isActive: false
+          },
+          {
+            id: 3,
+            name: '333',
+            isActive: true
+          }]
+        }
+        this.addList = this.addList.bind(this)
+        this.delList = this.delList.bind(this)
+        this.changeList = this.change.bind(this)
+      }
+
+      search(value){
+
+      }
+
+      change(id) {
+        let arr = [...this.state.list]
+        arr.forEach((item,index) => {
+          if(item.id == id) {
+            item.isActive = !item.isActive
+          }
+        })
+
+        this.setState({
+          list: arr
+        })
+      }
+
+      addList(data) {
+        let arr = [...this.state.list];
+        arr.push({
+          id: new Date().getTime(),
+          name: data,
+          isActive: false
+        });
+
+        this.setState({
+          list: arr
+        })
+      }
+      delList(id){
+        // let arr = [...this.state.list]
+        // arr.splice(index, 1)
+
+        let arr = this.state.list.filter((item,index)=>{
+          return item.id!=id
+        })
+        console.log(arr)
+        this.setState({
+          list: arr
+        })
+      }
+      render() {
+        return(
+          <div>
+            <h1>ToDo List</h1>
+            <Search/>
+            <Add addList={this.addList}/>
+            <List todos={this.state.list} delList={this.delList}/>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Main/>, document.getElementById('root'))
+  </script>
+</body>
+</html>

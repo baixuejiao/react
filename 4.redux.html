@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 
+    认识Redux
+      状态管理容器
+        可以独立使用，但大部分时间都是和React一起使用
+        单向数据流，简单，易于调试
+
+      组件发起更新请求：dispatch(action)
+      Reducer接收请求
+      Reducer更新store所保存的state数据
+      store通知组件，以便更新组件内部状态
+
+    使用Redux
+      1.安装 npm install redux -D  yarn add redux -D
+
+      2.使用
+        1.引入 import {createStore} from 'redux'
+        2.reducer 函数 状态更新执行
+   -->
+
+   <!-- 
+      redux —— 管理数据
+      function reducer (state={xxx}, action) {
+        switch(action.type) {
+          case 'xxx': //返回一个新对象
+            return {
+              ...state,
+              x: xxx
+            }
+          default:  
+            return state //数据初始化
+        }
+      }
+
+      使用Redux DevTools
+        安装 直接拖到chrome
+        使用
+          注意 
+            必须有网络环境
+            需要在createStore中注入扩展
+
+
+
+      安装 
+        cnpm i redux react-redux -D 
+      主要组件
+        Provider: 用于包裹整个程序，以此实现跨组件的状态共享 
+        connect: 合并函数，在模块中访问状态对象，并且完成状态映射
+        reducer ：一个状态对象，被称为一个reducer（叫这个，和状态对象的工作原理有关）
+      redux和react-redux
+
+      Action 是把数据从应用 传到 store 的有效载荷。它是 store 数据的唯一来源
+      Action 本质上是 JavaScript 普通对象。我们约定，action 内必须使用一个字符串类型的 type 字段来表示将要执行的动作。多数情况下，type 会被定义成字符串常量。当应用规模越来越大时，建议使用单独的模块或文件来存放 action。
+
+      reducer 就是一个纯函数，接收旧的 state 和 action，返回新的 state。
+    -->
+</body>
+</html>

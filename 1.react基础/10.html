@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+  
+    <!-- babel  用于编译jsx -->
+    <script src="./js/browser.min.js"></script>
+    <!-- react 核心功能 只能定义组件 只能管理状态 -->
+    <script src="./js/react.development.js"></script>
+    <!-- 依赖react.development.js 用于渲染组件 -->
+    <script src="./js/react-dom.development.js"></script>
+  
+    <script type="text/babel">
+    // 属性
+    // 状态
+      class Cmp1 extends React.Component{
+        constructor(...args) {
+          super(...args)
+          this.a = 12;
+          // state 初始化
+          // state 状态的变化会导致组件重新渲染
+          this.state = {
+            a: 1
+          }
+        }
+
+        // 
+        fn() {
+          // this 应该是当前组件的实力
+          // 组件重新渲染后才会出现组件新的值，所以在改变后需要让组件重新渲染
+          this.a++;
+          // console.log(this.a);
+          //组件重新渲染必须要修改状态
+
+          // this.setState({
+          //   a: this.state.a + 1
+          // })
+        }
+        
+        render() {
+          // this render里的this是对的
+          console.log('渲染了')
+          return (
+            <div>
+              {this.a}
+              {this.state.a}
+              <button onClick={this.fn.bind(this)}>按钮 +1</button>
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(<Cmp1 />  ,document.getElementById('app'))
+    
+    </script>
+</body>
+</html>

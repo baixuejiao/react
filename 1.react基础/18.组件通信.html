@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <!--
+      所有需要变的放在状态里
+    -->
+    <div id="app"></div>
+  
+    <!-- babel  用于编译jsx -->
+    <script src="./js/browser.min.js"></script>
+    <!-- react 核心功能 只能定义组件 只能管理状态 -->
+    <script src="./js/react.development.js"></script>
+    <!-- 依赖react.development.js 用于渲染组件 -->
+    <script src="./js/react-dom.development.js"></script>
+  
+    <!-- 
+      父组件 -> 子组件
+     -->
+     <!-- 
+       子组件 -> 父组件
+      -->
+
+      <!-- 
+        非父子组件
+          同页面内: 公共对象、共同父级中转
+          跨页面: localStorage、服务器中转
+          redux
+       -->
+    <script type="text/babel">
+      class Child extends React.Component{
+        constructor(...args) {
+          super(...args)
+         
+        }
+
+        fn() {
+          let parent = this.props.parent
+          console.log(parent)
+          // parent.setState({
+          //   a: parent.state.a + 1
+          // })
+
+          parent.add();
+        }
+
+        render() {
+          return (
+            <div>
+              <h2>子组件</h2>
+              <input type="button"  value="add" onClick={this.fn.bind(this)}/>
+            </div>
+          )
+        }
+      }
+      class Parent extends React.Component{
+        constructor(...args) {
+          super(...args)
+          this.state = {
+            a: 0
+          }
+        }
+
+        add() {
+          this.setState({
+            a: this.state.a + 1
+          })
+        }
+
+        render() {
+          return (
+            <div>
+              <h2>父组件</h2>
+              a = {this.state.a}
+              <Child  parent={this} />
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(<Parent/>  ,document.getElementById('app'))
+    
+    </script>
+</body>
+</html>

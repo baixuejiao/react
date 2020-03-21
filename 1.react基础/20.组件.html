@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- babel  用于编译jsx -->
+  <script src="./js/browser.min.js"></script>
+  <!-- react 核心功能 只能定义组件 只能管理状态 -->
+  <script src="./js/react.development.js"></script>
+  <!-- 依赖react.development.js 用于渲染组件 -->
+  <script src="./js/react-dom.development.js"></script>
+
+
+  <script type="text/babel">
+    class Child extends React.Component{
+      constructor(params) {
+        super(params)
+        this.state = {
+          num: 0
+        }
+      }
+
+      add() {
+        this.setState({
+          num: this.state.num+1
+        })
+      }
+
+      render(){
+        return (
+          <div>
+            子组件：
+            num:{this.state.num}
+          </div>
+        )
+      }
+    }
+    class Parent extends React.Component{
+      constructor(params) {
+        super(params)
+      }
+
+      addFun(){
+        this.refs.child1.add()
+      }
+
+      render(){
+        return (
+          <div>
+            <Child ref="child1"/>
+            <button onClick={this.addFun.bind(this)}>+1</button>
+          </div>
+        )
+      }
+    }
+    
+    ReactDOM.render(<Parent/>,document.getElementById('app'))
+  
+  
+  </script>
+</body>
+</html>

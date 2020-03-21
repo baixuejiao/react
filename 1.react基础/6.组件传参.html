@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+
+  <!-- babel  用于编译jsx -->
+  <script src="./js/browser.min.js"></script>
+  <!-- react 核心功能 只能定义组件 只能管理状态 -->
+  <script src="./js/react.development.js"></script>
+  <!-- 依赖react.development.js 用于渲染组件 -->
+  <script src="./js/react-dom.development.js"></script>
+
+  <script type="text/babel">
+    class Cmp1 extends React.Component{
+      constructor(...args) {
+        super(...args)
+      }
+      
+      render() {
+        return (
+          <div>
+            {this.props.txt}
+            姓名:{this.props.name}
+            <br/>
+            年龄: {this.props.age}
+          </div>
+        )
+      }
+    }
+     
+    let app = document.getElementById('app');
+    // age 传参方式是传递一个字符串
+    // age1 的方式可以传任意类型的
+    ReactDOM.render(<Cmp1 txt="bbb" name="xm" age="18" age1={18}></Cmp1>,app)
+  
+  </script>
+</body>
+</html>

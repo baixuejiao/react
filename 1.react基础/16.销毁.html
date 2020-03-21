@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <!-- 
+        钩子函数 -> 事件
+
+        组件生命周期
+          创建阶段（mount）
+            constructor：构造函数，这时还不算是个组件，只是class自身的初始化
+            getDerivedStateFromProps（是一个检查函数）: 检查需要更新的状态
+            render：初始渲染
+            componentDidMount：组件创建完成，并已挂在到DOM结构中
+          
+          更新阶段（update）
+            getDerivedStateFromProps: 检查需要更新的状态
+            shouldComponentUpdate: 确定组件是否应该更新
+            render
+            getSnapshotBeforeUpdate: 更新前保存DOM状态
+            componentDidUpdate
+
+          销毁阶段（unmount）
+            componentWillUnmount: 组件已销毁
+
+
+
+
+
+     -->
+
+    <div id="app"></div>
+  
+    <!-- babel  用于编译jsx -->
+    <script src="./js/browser.min.js"></script>
+    <!-- react 核心功能 只能定义组件 只能管理状态 -->
+    <script src="./js/react.development.js"></script>
+    <!-- 依赖react.development.js 用于渲染组件 -->
+    <script src="./js/react-dom.development.js"></script>
+    
+    <script type="text/babel">
+    class Parent extends React.Component{
+        constructor(...args) {
+          super(...args)
+          this.state = {
+            tag: true
+          }
+          console.log('constructor');
+        }
+
+        fn() {
+          this.setState({
+            tag: !this.state.tag
+          })
+        }
+       
+       
+        render() {
+          return (
+            <div>
+              <input type="button" value="有/没有" onClick={this.fn.bind(this)}/>
+              {this.state.tag ? (
+                <Child />
+              ) : (
+                ('')
+              )}
+            </div>
+          )
+        }
+      }
+      class Child extends React.Component{
+        constructor(...args) {
+          super(...args)
+          
+        }
+
+        componentDidMount() {
+          console.log('mount')
+        }
+
+        componentWillUnmount() {
+          console.log('unmount')
+        }
+       
+        render() {
+          return (
+            <div>
+              aaa
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(<Parent/>  ,document.getElementById('app'))
+    
+    </script>
+</body>
+</html>

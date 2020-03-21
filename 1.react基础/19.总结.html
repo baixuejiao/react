@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 
+    和Vue.js区别
+      vue和react没有本质区别
+        vue更注重视图的自动同步，使用习惯偏向前端人员
+        react更注重组件及其状态管理，使用习惯偏向程序人员
+      相对于vue，React更加透明，没有过多的隐含逻辑（比如Vue的指令就是一种隐含逻辑），更便于程序员理解程序的执行过程，当然，也更加复杂强大
+
+    React生态圈
+      JSX: 扩展了JS自身的语法，是React的基础
+      Flux: React的数据流组件
+      Redux: 比Flux更加简单，易用
+      React-Native: 用react编写原生移动应用
+      React-server: 服务端渲染React组件
+
+    JSX
+      jsx是一门独立的语言，希望能改进js的很多问题，但是ES6出现后，包含了JSX的大部分特性，所以很少独立使用
+        babel可以编译JSX
+        react是基于JSX语法
+    
+    JSX的主要特色
+      提供模板是创建元素的方法
+      注：JSX并不会真正创建DOM元素（内部名称：Node），JSX只是解析模板语法，创建虚拟DOM节点，需经由ReactDOM渲染才会成为真正的DOM元素
+
+    关于虚拟DOM
+      （主要是为了提高性能，提高大页面的表现能力）
+      直接操作DOM元素非常缓慢（资源开销是普通数据操作的数干倍），所以很多框架（Vue，React）都具备虚拟DOM特性，我们直接操作的是虚拟DOM，而非真实节点，React会在何时的时机批量更新DOM节点（一般是 主进程空闲时间），从而提高性能
+
+    能否单独使用JSX？
+      不能，React强依赖JSX（browser）用于解析JSX语法，但JSX也强依赖React用于解析模板语法
+
+    第一个React程序
+      browser.js: babel，用于编译JSX
+      react.js: react核心库
+      react-dom.js: 用于渲染组件
+      必须先引入react.js 然后引入react-dom.js
+    
+    特殊属性
+      React中的‘html代码’，其实不是真正的HTML，更是一种JSX语法，绝大部分标签一样用，但有两个属性需要修改
+      class: className
+      for: htmlFor
+
+    单标签
+      React中单标签必须闭合（html标签和自定义组件都是）
+      <img src=""> -> 错误
+      <img src="" /> -> 正确
+
+    React组件
+      组件必须继承React.Compoent
+      组件必须有constructor()且super父级，否则状态等无法使用  进行状态初始化
+      组件必须有render()方法
+      组件名(类名)必须首字母大写
+      组件使用时，单双标签都可以
+      组件中的HTML必须规范(双标签闭合、单标签结尾加/)
+
+    模板输出
+      输出变量、属性、方法...任何东西都可以 {}
+    
+    组件传参
+      用props接收参数
+
+    组件数组
+      可以直接输出一组元素
+      关于key
+        key非常重要，它关联虚拟DOM和真实DOM，从而在虚拟DOM修改时对实际DOM元素做最小化的修改以此提高性能，普通元素其实也有key，由React生成，而数组元素则需要我们指定
+        注意：尽量不要用index作为key，因为index是会变得（比如删掉一个元素，后续元素的index都会-1）
+      key选择标准
+        唯一： 否则ReactDOM无法工作
+        不变： 否则DOM元素混乱
+
+
+
+   -->
+</body>
+</html>

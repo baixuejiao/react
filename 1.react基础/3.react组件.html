@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+
+  <!-- babel  用于编译jsx -->
+  <script src="./js/browser.min.js"></script>
+  <!-- react 核心功能 只能定义组件 只能管理状态 -->
+  <script src="./js/react.development.js"></script>
+  <!-- 依赖react.development.js 用于渲染组件 -->
+  <script src="./js/react-dom.development.js"></script>
+
+  <script type="text/babel">
+    // 所有的组件都应该显示在页面中，都必须有render
+    // 必须继承自React.Component
+    // 必须有constructor 做状态初始化
+    // 必须有render
+    // 组件名必须首字母大写 否则会认为是html标签
+    class Cmp1 extends React.Component{
+      // 
+      constructor(...args) {
+        super(...args)
+        this.a = 12
+      }
+      fn() {
+        return 55 + 88
+      }
+
+      render() {
+        // {} 代表输出 （模板）
+        // let a = 12;
+        let name = 'xm';
+        let age = 18;
+        // return <div>
+        //   a={this.fn()}
+        //   </div>
+        return <div>
+          a={this.a}
+          </div>
+      }
+    }
+    
+    let app = document.getElementById('app');
+    // 组件渲染
+    ReactDOM.render(<Cmp1></Cmp1>,app)
+  
+  </script>
+</body>
+</html>

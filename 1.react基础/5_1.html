@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+
+  <!-- babel  用于编译jsx -->
+  <script src="./js/browser.min.js"></script>
+  <!-- react 核心功能 只能定义组件 只能管理状态 -->
+  <script src="./js/react.development.js"></script>
+  <!-- 依赖react.development.js 用于渲染组件 -->
+  <script src="./js/react-dom.development.js"></script>
+
+  <script type="text/babel">
+    class Cmp1 extends React.Component{
+      constructor(...args) {
+        super(...args)
+        this.a = 12
+      }
+      fn() {
+        return 55 + 88
+      }
+
+      render() {
+        let name = 'xm'
+        // js 里面return 语法不能换行加()作为整体
+        return (
+          <div>
+            <span title="name">title的值是name name在这里是个字符串</span>
+            <span title={name}>title的值是xm name在这里是个变量</span>
+          </div>
+        )
+      }
+    }
+     
+    let app = document.getElementById('app');
+    ReactDOM.render(<Cmp1></Cmp1>,app)
+  
+  </script>
+</body>
+</html>

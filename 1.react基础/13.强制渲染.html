@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <!--
+      所有需要变的放在状态里
+    -->
+    <div id="app">
+
+    </div>
+  
+    <!-- babel  用于编译jsx -->
+    <script src="./js/browser.min.js"></script>
+    <!-- react 核心功能 只能定义组件 只能管理状态 -->
+    <script src="./js/react.development.js"></script>
+    <!-- 依赖react.development.js 用于渲染组件 -->
+    <script src="./js/react-dom.development.js"></script>
+  
+    
+    <script type="text/babel">
+      class Cmp1 extends React.Component{
+        constructor(...args) {
+          super(...args)
+          this.a = 5;
+         
+        }
+
+        fn() {
+          this.a++;
+          console.log(this.a);
+          // 强制更新
+          // render不时刻发生是为了节约资源 如果强制更新可能会浪费资源 会打乱react
+          // forceUpdate 会影响性能，也可能会造成页面渲染发生问题
+          this.forceUpdate();
+        }
+        
+        render() {
+          console.log('渲染了')
+          return (
+            <div>
+              {this.a}
+              <button onClick={this.fn.bind(this)}>按钮 +1</button>
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(<Cmp1/>  ,document.getElementById('app'))
+    
+    </script>
+</body>
+</html>

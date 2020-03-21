@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 
+    认识路由
+      通过不同的地址，展现不同组件，简化单页面应用的编写
+
+    使用react-router
+      npm i create-router-dom -D
+
+      react-router 相关的有四大组件
+        react-router: 核心库
+        react-router-dom: react-router的DOM绑定版
+        react-router-native: react-native用的
+        react-router-config: 静态配置辅助库
+
+    基本使用
+      三大对象
+        Router：路由对象，包裹在所有路由逻辑（链接、配置）之外
+          BrowserRouter：基于HTML5dehistory API，直接以path形式呈现
+            注： 浏览器并未真正刷新，服务器也没有对应地址，除非刷新，否则服务器也不会接到请求
+            适合配合服务器
+          HashRouter: 基于location.hash，页面不刷新
+            无法配合服务器使用
+          MemoryRouter: 路由状态保存在内存，刷新页面会消失
+            刷新后消失，无法配合服务器使用
+        
+        Route：路由配置，非常类似于Vue的路由表
+
+        Link: 路由跳转，类似于Vue的Link
+
+      三种路由的比较
+
+
+      路由参数
+        
+      路由跳转
+        本质上路由都是通过history（或近似原理）实现的 而history本质上是一个栈，所有总共有两套方法来操作
+        push pop 向栈尾添加 从栈尾取出
+        replace 直接替换掉当前的级别
+       
+      link
+        相当于push操作 类似于a链接
+
+      redirect重定向
+        相当于replace操作，类似于302
+
+      <Link to={{
+        pathname: '',
+        hash: '',
+        search: ''
+      }}>   
+      
+      this.props.history
+      this.props.history.push('/about')
+      this.props.history.push({
+        
+      })
+
+      this.props.go()
+      this.props.back()
+      this.props.forward()
+
+      this.props.replace()
+      listen 监听
+      this.props.match -> router一部分
+      search是location一部分
+
+      let params = new URLSearchParams(location.search)
+      params.get('c')
+   -->
+
+   <!-- <script>
+     URLSearchParams()
+    
+   </script> -->
+</body>
+</html> 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+  
+    <!-- babel  用于编译jsx -->
+    <script src="./js/browser.min.js"></script>
+    <!-- react 核心功能 只能定义组件 只能管理状态 -->
+    <script src="./js/react.development.js"></script>
+    <!-- 依赖react.development.js 用于渲染组件 -->
+    <script src="./js/react-dom.development.js"></script>
+  
+    
+    <script type="text/babel">
+      class Parent extends React.Component{
+        constructor(params) {
+          super(params)
+
+          this.state = {
+            tag: false,
+            number: 60
+          }
+
+          this.changeStatus = this.changeStatus.bind(this)
+        }
+
+        changeStatus() {
+          this.setState({
+            tag: !this.state.tag
+          })
+        } 
+
+        render() {
+          return (
+            <div>
+              <button onClick={this.changeStatus}>点击获取验证码</button>
+              {
+                this.state.tag ? <Clock stop={this.changeStatus}/> : null
+              }
+            </div>
+          )
+        }
+      }
+      class Clock extends React.Component{
+        constructor(params) {
+          super(params)
+
+          this.state = {
+            number: 6
+          }
+
+          this.tick = this.tick.bind(this)
+        }
+
+        tick() {
+          this.setState({
+            number: this.state.number - 1
+          })
+        }
+
+        static getDerivedStateFromProps(props, state){
+          console.log(props,state)
+        }
+
+        componentDidMount(next) {
+          console.log('didmount');
+          console.log(next)
+          // this.timer = setInterval(() => {
+          //   this.tick()
+          // },1000)
+        }
+
+        shouldComponentUpdate(nextProps, nextState) {
+          console.log(nextState)
+          if (nextState.number <= 0) {
+            this.props.stop();
+            return false
+          } else {
+            return true
+          }
+        }
+
+        componentDidUpdate() {
+          console.log('didUpdate');
+        }
+
+        componentWillUnmount() {
+          clearInterval(this.timer)
+          console.log('unmount')
+        }
+
+        render() {
+          console.log('render')
+          return (
+            <div>
+              <span>{this.state.number}秒后重新获取</span>
+            </div>
+          )
+        }
+      }
+      
+      
+      ReactDOM.render(<Parent/>  ,document.getElementById('app'))
+    
+    </script>
+</body>
+</html>
